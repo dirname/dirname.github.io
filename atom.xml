@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>当然是选择原谅她</title>
+  
+  <subtitle>Ah&#39;s 博客</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://blog.forgiveher.cn/"/>
+  <updated>2019-04-16T04:37:19.579Z</updated>
+  <id>https://blog.forgiveher.cn/</id>
+  
+  <author>
+    <name>Ah !</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Python运算符重载和特殊方法</title>
+    <link href="https://blog.forgiveher.cn/2019/04/15/1555335611/"/>
+    <id>https://blog.forgiveher.cn/2019/04/15/1555335611/</id>
+    <published>2019-04-15T13:40:11.000Z</published>
+    <updated>2019-04-16T04:37:19.579Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;ul&gt;
+&lt;li&gt;数据结构与算法 [面向对象编程]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;操作系统: Windows 10&lt;/li&gt;
+&lt;li&gt;Anaconda 2019.3 Python 3.7.1&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h1 id=&quot;概念&quot;&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+      <category term="Data Structures &amp; Algorithms" scheme="https://blog.forgiveher.cn/categories/Data-Structures-Algorithms/"/>
+    
+    
+      <category term="数据结构与算法" scheme="https://blog.forgiveher.cn/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="Python" scheme="https://blog.forgiveher.cn/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>彩虹六号战绩查询开发文档</title>
+    <link href="https://blog.forgiveher.cn/2019/03/10/1552210325/"/>
+    <id>https://blog.forgiveher.cn/2019/03/10/1552210325/</id>
+    <published>2019-03-10T09:32:05.000Z</published>
+    <updated>2019-04-15T14:29:01.276Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;ul&gt;
+&lt;li&gt;此文档为彩虹六号战绩查询开发版文档 第一版 仅适用于项目维护开发人员&lt;/li&gt;
+&lt;li&gt;更新时间 2019年3月11日&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h1 id=&quot;API-说明&quot;&gt;&lt;a href=&quot;#API-说明&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="Wiki" scheme="https://blog.forgiveher.cn/categories/Wiki/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>名华慕课App算法解密过程以及软件实现</title>
+    <link href="https://blog.forgiveher.cn/2018/12/16/1544945520/"/>
+    <id>https://blog.forgiveher.cn/2018/12/16/1544945520/</id>
+    <published>2018-12-16T07:32:00.000Z</published>
+    <updated>2019-04-15T14:29:01.275Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;ul&gt;
+&lt;li&gt;测试环境 Windows 10 x64&lt;/li&gt;
+&lt;li&gt;Fiddler 5.0.20182.28034&lt;/li&gt;
+&lt;li&gt;ApkIDE 3.5.0.0&lt;/li&gt;
+&lt;li&gt;测试样本 名华慕课 Android 版 1.0.3&lt;/li&gt;
+&lt;li&gt;Python
+        
+      
+    
+    </summary>
+    
+      <category term="Disassembler" scheme="https://blog.forgiveher.cn/categories/Disassembler/"/>
+    
+    
+      <category term="逆向" scheme="https://blog.forgiveher.cn/tags/%E9%80%86%E5%90%91/"/>
+    
+      <category term="算法" scheme="https://blog.forgiveher.cn/tags/%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>网易云音乐 Web 登录算法解密过程分析以及实现</title>
+    <link href="https://blog.forgiveher.cn/2018/12/15/1544852143/"/>
+    <id>https://blog.forgiveher.cn/2018/12/15/1544852143/</id>
+    <published>2018-12-15T05:35:43.000Z</published>
+    <updated>2019-04-15T14:29:01.276Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;ul&gt;
+&lt;li&gt;测试环境 Ubuntu 18.10 x64&lt;/li&gt;
+&lt;li&gt;软件环境 Chrome
+        
+      
+    
+    </summary>
+    
+      <category term="Disassembler" scheme="https://blog.forgiveher.cn/categories/Disassembler/"/>
+    
+    
+      <category term="逆向" scheme="https://blog.forgiveher.cn/tags/%E9%80%86%E5%90%91/"/>
+    
+      <category term="算法" scheme="https://blog.forgiveher.cn/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="网易云音乐" scheme="https://blog.forgiveher.cn/tags/%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Frp 内网穿透配置和客户端自启</title>
+    <link href="https://blog.forgiveher.cn/2018/12/14/1544801182/"/>
+    <id>https://blog.forgiveher.cn/2018/12/14/1544801182/</id>
+    <published>2018-12-14T15:26:22.000Z</published>
+    <updated>2019-04-15T14:29:01.275Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;ul&gt;
+&lt;li&gt;客户端环境 Ubuntu 18.10 x64&lt;/li&gt;
+&lt;li&gt;服务端环境 CentOS 7.4 x64&lt;/li&gt;
+&lt;li&gt;Git 2.19.1&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h1 id=&quot;安装-FRP&quot;&gt;&lt;a href=&quot;#安装-FRP&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="Other" scheme="https://blog.forgiveher.cn/categories/Other/"/>
+    
+    
+      <category term="内网穿透" scheme="https://blog.forgiveher.cn/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/"/>
+    
+      <category term="Frp" scheme="https://blog.forgiveher.cn/tags/Frp/"/>
+    
+  </entry>
+  
+</feed>

@@ -1,0 +1,1614 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/Christmas.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/Christmas_32.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/Christmas_16.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/Christmas.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="测试环境 Ubuntu 18.10 x64 软件环境 Chrome 71.0.3578.98   近期需要对网易云音乐的登录和评论点赞功能做一些工具类的软件，记录一下网易云音乐API的解密过程和实现方法 登录分析首先使用浏览器打开 网易云音乐 抓包打开网易云音乐后 点击右上角登录 -&amp;gt; 使用手机号登录，此时按下F12，打开开发者工具，并切换到 Network  输入自己的网易云音乐账号，得">
+<meta name="keywords" content="逆向,算法,网易云音乐">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网易云音乐 Web 登录算法解密过程分析以及实现">
+<meta property="og:url" content="https://blog.forgiveher.cn/2018/12/15/1544852143/index.html">
+<meta property="og:site_name" content="当然是选择原谅她">
+<meta property="og:description" content="测试环境 Ubuntu 18.10 x64 软件环境 Chrome 71.0.3578.98   近期需要对网易云音乐的登录和评论点赞功能做一些工具类的软件，记录一下网易云音乐API的解密过程和实现方法 登录分析首先使用浏览器打开 网易云音乐 抓包打开网易云音乐后 点击右上角登录 -&amp;gt; 使用手机号登录，此时按下F12，打开开发者工具，并切换到 Network  输入自己的网易云音乐账号，得">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://blog.forgiveher.cn/2018/12/15/1544852143/1.png">
+<meta property="og:image" content="https://blog.forgiveher.cn/2018/12/15/1544852143/2.png">
+<meta property="og:image" content="https://blog.forgiveher.cn/2018/12/15/1544852143/3.png">
+<meta property="og:image" content="https://blog.forgiveher.cn/2018/12/15/1544852143/4.png">
+<meta property="og:image" content="https://blog.forgiveher.cn/2018/12/15/1544852143/5.png">
+<meta property="og:image" content="https://blog.forgiveher.cn/2018/12/15/1544852143/6.png">
+<meta property="og:image" content="https://blog.forgiveher.cn/2018/12/15/1544852143/7.png">
+<meta property="og:image" content="https://blog.forgiveher.cn/2018/12/15/1544852143/8.png">
+<meta property="og:image" content="https://blog.forgiveher.cn/2018/12/15/1544852143/9.png">
+<meta property="og:image" content="https://blog.forgiveher.cn/2018/12/15/1544852143/10.png">
+<meta property="og:image" content="https://blog.forgiveher.cn/2018/12/15/1544852143/11.png">
+<meta property="og:image" content="https://blog.forgiveher.cn/2018/12/15/1544852143/11.png">
+<meta property="og:image" content="https://blog.forgiveher.cn/2018/12/15/1544852143/14.png">
+<meta property="og:image" content="https://blog.forgiveher.cn/2018/12/15/1544852143/15.png">
+<meta property="og:image" content="https://blog.forgiveher.cn/2018/12/15/1544852143/16.png">
+<meta property="og:image" content="https://blog.forgiveher.cn/2018/12/15/1544852143/17.png">
+<meta property="og:updated_time" content="2019-04-15T14:29:01.276Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="网易云音乐 Web 登录算法解密过程分析以及实现">
+<meta name="twitter:description" content="测试环境 Ubuntu 18.10 x64 软件环境 Chrome 71.0.3578.98   近期需要对网易云音乐的登录和评论点赞功能做一些工具类的软件，记录一下网易云音乐API的解密过程和实现方法 登录分析首先使用浏览器打开 网易云音乐 抓包打开网易云音乐后 点击右上角登录 -&amp;gt; 使用手机号登录，此时按下F12，打开开发者工具，并切换到 Network  输入自己的网易云音乐账号，得">
+<meta name="twitter:image" content="https://blog.forgiveher.cn/2018/12/15/1544852143/1.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="当然是选择原谅她" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://blog.forgiveher.cn/2018/12/15/1544852143/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>网易云音乐 Web 登录算法解密过程分析以及实现 | 当然是选择原谅她</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">当然是选择原谅她</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Ah's 博客</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+  
+  
+
+  
+
+  <a href="https://github.com/dirname" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" style="fill: #222; color: #fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.forgiveher.cn/2018/12/15/1544852143/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ah !">
+      <meta itemprop="description" content="当然是选择原谅她 - Ah! 的博客 - blog.forgiveher.cn 什么都略懂一点，生活更多彩一些">
+      <meta itemprop="image" content="/images/cav.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="当然是选择原谅她">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">网易云音乐 Web 登录算法解密过程分析以及实现
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-12-15 13:35:43" itemprop="dateCreated datePublished" datetime="2018-12-15T13:35:43+08:00">2018-12-15</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-15 22:29:01" itemprop="dateModified" datetime="2019-04-15T22:29:01+08:00">2019-04-15</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Disassembler/" itemprop="url" rel="index"><span itemprop="name">Disassembler</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2018/12/15/1544852143/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/12/15/1544852143/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">13k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">11 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ul>
+<li>测试环境 Ubuntu 18.10 x64</li>
+<li>软件环境 Chrome 71.0.3578.98</li>
+</ul>
+<hr>
+<p>近期需要对网易云音乐的登录和评论点赞功能做一些工具类的软件，记录一下网易云音乐API的解密过程和实现方法</p>
+<h1 id="登录分析"><a href="#登录分析" class="headerlink" title="登录分析"></a>登录分析</h1><p>首先使用浏览器打开 <a href="https://music.163.com/" target="_blank" rel="noopener">网易云音乐</a></p>
+<h2 id="抓包"><a href="#抓包" class="headerlink" title="抓包"></a>抓包</h2><p>打开网易云音乐后 点击右上角登录 -&gt; 使用手机号登录，此时按下F12，打开开发者工具，并切换到 <strong>Network</strong></p>
+<p><img src="/2018/12/15/1544852143/1.png" alt="开发者工具 Network"></p>
+<p>输入自己的网易云音乐账号，得到登录的包（为了方便测试，密码可以输错）</p>
+<p><img src="/2018/12/15/1544852143/2.png" alt="抓取登录数据包"></p>
+<p>如图，登录时向 </p>
+<blockquote>
+<p><a href="https://music.163.com/weapi/login/cellphone?csrf_token=" target="_blank" rel="noopener">https://music.163.com/weapi/login/cellphone?csrf_token=</a> </p>
+</blockquote>
+<p>提交了两个字段 <strong>params</strong>、<strong>encSecKey</strong></p>
+<p>猜测 <strong>encSecKey</strong> 为 <strong>params</strong> 的解密密匙</p>
+<h2 id="寻找-encSecKey-算法"><a href="#寻找-encSecKey-算法" class="headerlink" title="寻找 encSecKey 算法"></a>寻找 encSecKey 算法</h2><p>在开发者工具切换到 <strong>Sources</strong> 右键 <strong>Top</strong> 后点击 <strong>Search in all files</strong> 随后输入 <strong> encSecKey </strong></p>
+<p><img src="/2018/12/15/1544852143/3.png" alt="搜索结果"></p>
+<p>搜索结果中，只有一个js包含了encSecKey</p>
+<blockquote>
+<p><a href="https://s3.music.126.net/web/s/core_db15e45072c12697d6fed065e7a71f62.js" target="_blank" rel="noopener">https://s3.music.126.net/web/s/core_db15e45072c12697d6fed065e7a71f62.js</a></p>
+</blockquote>
+<h2 id="静态分析算法"><a href="#静态分析算法" class="headerlink" title="静态分析算法"></a>静态分析算法</h2><p>从搜索结果中，定位到88行和90行，将其格式化后</p>
+<p><strong>88行：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">!</span><br><span class="line"><span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params">a</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> d, e, b = <span class="string">"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"</span>,</span><br><span class="line">        c = <span class="string">""</span>;</span><br><span class="line">        <span class="keyword">for</span> (d = <span class="number">0</span>; a &gt; d; d += <span class="number">1</span>) e = <span class="built_in">Math</span>.random() * b.length,</span><br><span class="line">        e = <span class="built_in">Math</span>.floor(e),</span><br><span class="line">        c += b.charAt(e);</span><br><span class="line">        <span class="keyword">return</span> c</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">b</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> c = CryptoJS.enc.Utf8.parse(b),</span><br><span class="line">        d = CryptoJS.enc.Utf8.parse(<span class="string">"0102030405060708"</span>),</span><br><span class="line">        e = CryptoJS.enc.Utf8.parse(a),</span><br><span class="line">        f = CryptoJS.AES.encrypt(e, c, &#123;</span><br><span class="line">            iv: d,</span><br><span class="line">            mode: CryptoJS.mode.CBC</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">return</span> f.toString()</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">c</span>(<span class="params">a, b, c</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> d, e;</span><br><span class="line">        <span class="keyword">return</span> setMaxDigits(<span class="number">131</span>),</span><br><span class="line">        d = <span class="keyword">new</span> RSAKeyPair(b, <span class="string">""</span>, c),</span><br><span class="line">        e = encryptedString(d, a)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">d</span>(<span class="params">d, e, f, g</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> h = &#123;&#125;,</span><br><span class="line">        i = a(<span class="number">16</span>);</span><br><span class="line">        <span class="keyword">return</span> h.encText = b(d, g),</span><br><span class="line">        h.encText = b(h.encText, i),</span><br><span class="line">        h.encSecKey = c(i, e, f),</span><br><span class="line">        h</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">e</span>(<span class="params">a, b, d, e</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> f = &#123;&#125;;</span><br><span class="line">        <span class="keyword">return</span> f.encText = c(a + e, b, d),</span><br><span class="line">        f</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">window</span>.asrsea = d,</span><br><span class="line">    <span class="built_in">window</span>.ecnonasr = e</span><br><span class="line">&#125; ();</span><br></pre></td></tr></table></figure></p>
+<p><strong>90行：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> c9h = NEJ.P,</span><br><span class="line">    er2x = c9h(<span class="string">"nej.g"</span>),</span><br><span class="line">    v9m = c9h(<span class="string">"nej.j"</span>),</span><br><span class="line">    j9a = c9h(<span class="string">"nej.u"</span>),</span><br><span class="line">    RQ5V = c9h(<span class="string">"nm.x.ek"</span>),</span><br><span class="line">    l9c = c9h(<span class="string">"nm.x"</span>);</span><br><span class="line">    <span class="keyword">if</span> (v9m.bl0x.redefine) <span class="keyword">return</span>;</span><br><span class="line">    <span class="built_in">window</span>.GEnc = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">var</span> brK2x = <span class="function"><span class="keyword">function</span>(<span class="params">cxx7q</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> m9d = [];</span><br><span class="line">        j9a.be0x(cxx7q,</span><br><span class="line">        <span class="function"><span class="keyword">function</span>(<span class="params">cxv7o</span>) </span>&#123;</span><br><span class="line">            m9d.push(RQ5V.emj[cxv7o])</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">return</span> m9d.join(<span class="string">""</span>)</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">var</span> cxt7m = v9m.bl0x;</span><br><span class="line">    v9m.bl0x = <span class="function"><span class="keyword">function</span>(<span class="params">Y0x, e9f</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> i9b = &#123;&#125;,</span><br><span class="line">        e9f = NEJ.X(&#123;&#125;,</span><br><span class="line">        e9f),</span><br><span class="line">        mt4x = Y0x.indexOf(<span class="string">"?"</span>);</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">window</span>.GEnc &amp;&amp; <span class="regexp">/(^|\.com)\/api/</span>.test(Y0x) &amp;&amp; !(e9f.headers &amp;&amp; e9f.headers[er2x.Ae0x] == er2x.Hb2x) &amp;&amp; !e9f.noEnc) &#123;</span><br><span class="line">            <span class="keyword">if</span> (mt4x != <span class="number">-1</span>) &#123;</span><br><span class="line">                i9b = j9a.hg3x(Y0x.substring(mt4x + <span class="number">1</span>));</span><br><span class="line">                Y0x = Y0x.substring(<span class="number">0</span>, mt4x)</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (e9f.query) &#123;</span><br><span class="line">                i9b = NEJ.X(i9b, j9a.fR2x(e9f.query) ? j9a.hg3x(e9f.query) : e9f.query)</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (e9f.data) &#123;</span><br><span class="line">                i9b = NEJ.X(i9b, j9a.fR2x(e9f.data) ? j9a.hg3x(e9f.data) : e9f.data)</span><br><span class="line">            &#125;</span><br><span class="line">            i9b[<span class="string">"csrf_token"</span>] = v9m.gR2x(<span class="string">"__csrf"</span>);</span><br><span class="line">            Y0x = Y0x.replace(<span class="string">"api"</span>, <span class="string">"weapi"</span>);</span><br><span class="line">            e9f.method = <span class="string">"post"</span>;</span><br><span class="line">            <span class="keyword">delete</span> e9f.query;</span><br><span class="line">            <span class="keyword">var</span> bVs1x = <span class="built_in">window</span>.asrsea(<span class="built_in">JSON</span>.stringify(i9b), brK2x([<span class="string">"流泪"</span>, <span class="string">"强"</span>]), brK2x(RQ5V.md), brK2x([<span class="string">"爱心"</span>, <span class="string">"女孩"</span>, <span class="string">"惊恐"</span>, <span class="string">"大笑"</span>]));</span><br><span class="line">            e9f.data = j9a.cB0x(&#123;</span><br><span class="line">                params: bVs1x.encText,</span><br><span class="line">                encSecKey: bVs1x.encSecKey</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">        cxt7m(Y0x, e9f)</span><br><span class="line">    &#125;;</span><br><span class="line">    v9m.bl0x.redefine = <span class="literal">true</span></span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure></p>
+<p>静态分析后，90行处的代码只是进行了简单的赋值，params由bVs1x.encText而来，encSecKey由bVs1x.encSecKey而来，在88行处，可以看到加密的方式算法和过程，因此88行作为我们的突破口</p>
+<p>根据 <strong>encSecKey</strong> 为关键字寻找，发现在 function d 对其进行了赋值</p>
+<p>function d:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">d</span>(<span class="params">d, e, f, g</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> h = &#123;&#125;,</span><br><span class="line">        i = a(<span class="number">16</span>);</span><br><span class="line">        <span class="keyword">return</span> h.encText = b(d, g),</span><br><span class="line">        h.encText = b(h.encText, i),</span><br><span class="line">        h.encSecKey = c(i, e, f),</span><br><span class="line">        h</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>其中分别调用了 function a,b,c</p>
+<p>逐一静态分析各个 function</p>
+<p>function a:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params">a</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> d, e, b = <span class="string">"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"</span>,</span><br><span class="line">        c = <span class="string">""</span>;</span><br><span class="line">        <span class="keyword">for</span> (d = <span class="number">0</span>; a &gt; d; d += <span class="number">1</span>) e = <span class="built_in">Math</span>.random() * b.length,</span><br><span class="line">        e = <span class="built_in">Math</span>.floor(e),</span><br><span class="line">        c += b.charAt(e);</span><br><span class="line">        <span class="keyword">return</span> c</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>function a 随机生成一个长度为传入 int 值的字符串</p>
+<p>function b:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">b</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> c = CryptoJS.enc.Utf8.parse(b),</span><br><span class="line">        d = CryptoJS.enc.Utf8.parse(<span class="string">"0102030405060708"</span>),</span><br><span class="line">        e = CryptoJS.enc.Utf8.parse(a),</span><br><span class="line">        f = CryptoJS.AES.encrypt(e, c, &#123;</span><br><span class="line">            iv: d,</span><br><span class="line">            mode: CryptoJS.mode.CBC</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">return</span> f.toString()</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>从调用的关键字来看，这是一个有关AES的对称加密算法，模式为CBC，iv(向量)为d，也就是<strong>“0102030405060708”</strong></p>
+<p>function c:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">c</span>(<span class="params">a, b, c</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> d, e;</span><br><span class="line">        <span class="keyword">return</span> setMaxDigits(<span class="number">131</span>),</span><br><span class="line">        d = <span class="keyword">new</span> RSAKeyPair(b, <span class="string">""</span>, c),</span><br><span class="line">        e = encryptedString(d, a)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>静态分析来看，这是一个有关于 RSA 的参数，接下来我们使用断点动态分析加密函数</p>
+<h2 id="断点调试算法"><a href="#断点调试算法" class="headerlink" title="断点调试算法"></a>断点调试算法</h2><p>在下图几个地方打上断点</p>
+<p><img src="/2018/12/15/1544852143/4.png" alt="断点1"><br><img src="/2018/12/15/1544852143/5.png" alt="断点2"><br><img src="/2018/12/15/1544852143/6.png" alt="断点3"><br><img src="/2018/12/15/1544852143/7.png" alt="断点4"></p>
+<p>打上了断点以后我们再一次点击登录</p>
+<p>看到js运行到断点时，停止了，第个断点处，传入了参数 a:16 生成一个16位的字符串</p>
+<p><img src="/2018/12/15/1544852143/8.png" alt="断点运行1"></p>
+<p>运行到第二个断点时，传入参数 c : “fAY0MsZsT3WA0eXg” 这是AES的加密密匙</p>
+<p><img src="/2018/12/15/1544852143/9.png" alt="断点运行2"> </p>
+<p>运行到第三个断点时，传入参数 b : “0CoJUm6Qyw8W8jud” 和一串json a(登录信息)</p>
+<p><img src="/2018/12/15/1544852143/10.png" alt="断点运行3"> </p>
+<p>运行到第四个断点时，传入参数 b : “fAY0MsZsT3WA0eXg”（AES密匙）和一串Base64字符串:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a : &quot;2pi8lzed+/YUH63EXHn6d9IwIDeruHJmzW0rjEtUqUh00G+8ElR2XnxRvDOg+eWHcO06ukSrADFNFazIhKGNMJ/fYDsS2bTep4lkTxH42fLDCPm/v+Z/7P3guz9HcZWwNQ1Y1qb2pUNt1nmGpR89n+MiPQb3gbOscmJPXf8V60kDuLF0u0dwHkeqD5hIhgqRa3qZJCeYZcU3GrAEABFMe/cNhfcrUHpGgTOB4JJw==&quot;</span><br><span class="line">(为了保护信息，已经对这里的字符串a进行了删减)</span><br></pre></td></tr></table></figure></p>
+<p><img src="/2018/12/15/1544852143/11.png" alt="断点运行4"></p>
+<p>运行到第五个断点时，RSA的加密函数，传入了:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a : &quot;fAY0MsZsT3WA0eXg&quot;（AES密匙）</span><br><span class="line">b : &quot;010001&quot;</span><br><span class="line">C : &quot;00e0b509f6259df8642dbc35662901477df22677ec152b5ff68ace615bb7b725152b3ab17a876aea8a5aa76d2e417629ec4ee341f56135fccf695280104e0312ecbda92557c93870114af6c9d05c4f7f0c3685b7a46bee255932575cce10b424d813cfe4875d3e82047b97ddef52741d546b8e289dc6935b3ece0462db0a22b8e7&quot;</span><br></pre></td></tr></table></figure>
+<p><img src="/2018/12/15/1544852143/11.png" alt="断点运行5"></p>
+<p>第一次断点结束后，我们再点击一次登录，再次进行一次断点调试，通过第二次断点调试，发现第三次断点时的传入参数 b 和 第五个断点时的参数 b c 是不变的，分别为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">b = &quot;0CoJUm6Qyw8W8jud&quot; #第三次断点参数 b</span><br><span class="line">--- 第五次断点 ---</span><br><span class="line">b = &quot;010001&quot;</span><br><span class="line">c = &quot;00e0b509f6259df8642dbc35662901477df22677ec152b5ff68ace615bb7b725152b3ab17a876aea8a5aa76d2e417629ec4ee341f56135fccf695280104e0312ecbda92557c93870114af6c9d05c4f7f0c3685b7a46bee255932575cce10b424d813cfe4875d3e82047b97ddef52741d546b8e289dc6935b3ece0462db0a22b8e7&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="动静结合分析算法"><a href="#动静结合分析算法" class="headerlink" title="动静结合分析算法"></a>动静结合分析算法</h2><p>根据 function d :<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">d</span>(<span class="params">d, e, f, g</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> h = &#123;&#125;,</span><br><span class="line">        i = a(<span class="number">16</span>);</span><br><span class="line">        <span class="keyword">return</span> h.encText = b(d, g),</span><br><span class="line">        h.encText = b(h.encText, i),</span><br><span class="line">        h.encSecKey = c(i, e, f),</span><br><span class="line">        h</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>在 var h = {}, 处断点 得到d,e,f,g的值</p>
+</blockquote>
+<p><img src="/2018/12/15/1544852143/14.png" alt="断点运行6"></p>
+<p>可以看到<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">d = json a(登录信息) </span><br><span class="line">e = &quot;010001&quot; </span><br><span class="line">f = &quot;00e0b509f6259df8642dbc35662901477df22677ec152b5ff68ace615bb7b725152b3ab17a876aea8a5aa76d2e417629ec4ee341f56135fccf695280104e0312ecbda92557c93870114af6c9d05c4f7f0c3685b7a46bee255932575cce10b424d813cfe4875d3e82047b97ddef52741d546b8e289dc6935b3ece0462db0a22b8e7&quot;</span><br><span class="line">g = &quot;0CoJUm6Qyw8W8jud&quot;</span><br></pre></td></tr></table></figure></p>
+<p>将参数放入 function d 中，首先是使用第一个密匙”0CoJUm6Qyw8W8jud”对 JSON 登录信息的字符串进行了一次 AES 加密，随后得到的结果，在使用通过 function a 生成的16位字符作为AES的加密密匙对第一次AES加密的json的登录信息结果，再次加密，而得出的加密结果就作为 <strong>encText</strong>，也就是整个加密的流程为：</p>
+<p><img src="/2018/12/15/1544852143/15.png" alt="流程图"></p>
+<h2 id="验证算法"><a href="#验证算法" class="headerlink" title="验证算法"></a>验证算法</h2><p>在摸清了整个算法流程以后，我们使用<a href="http://www.seacha.com/tools/aes.html" target="_blank" rel="noopener">AES在线加解密</a>，将加密结果解密，看是否能得到最初的json登录信息，只需要<strong>params</strong>的值</p>
+<ul>
+<li>使用生成的密匙进行第一次解密 params</li>
+</ul>
+<p><img src="/2018/12/15/1544852143/16.png" alt="第一次decrypt"></p>
+<ul>
+<li>第一次解密后，我们仍然得到了一串Base64字符串，别着急，在使用默认的密匙”0CoJUm6Qyw8W8jud”对结果进行再次解密</li>
+</ul>
+<p><img src="/2018/12/15/1544852143/17.png" alt="第二次decrypt"></p>
+<p>此时已经得到了登录信息的 json 字符串 <strong>至此，整个网易云登录的算法分析到此结束</strong></p>
+<h1 id="Python-实现登录"><a href="#Python-实现登录" class="headerlink" title="Python 实现登录"></a>Python 实现登录</h1><ul>
+<li>Python 3.6.7</li>
+<li>pip 18.1</li>
+</ul>
+<h2 id="安装第三方库"><a href="#安装第三方库" class="headerlink" title="安装第三方库"></a>安装第三方库</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo pip install requests</span><br><span class="line">$ sudo pip install pycrypto</span><br><span class="line">$ sudo pip install future</span><br></pre></td></tr></table></figure>
+<h2 id="编写加密函数"><a href="#编写加密函数" class="headerlink" title="编写加密函数"></a>编写加密函数</h2><p>首先引用 AES 的默认密匙和 RSA 的 MODULUS 和 Pub_Key</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">MODULUS = (<span class="string">'00e0b509f6259df8642dbc35662901477df22677ec152b5ff68ace615bb7'</span></span><br><span class="line">            <span class="string">'b725152b3ab17a876aea8a5aa76d2e417629ec4ee341f56135fccf695280'</span></span><br><span class="line">            <span class="string">'104e0312ecbda92557c93870114af6c9d05c4f7f0c3685b7a46bee255932'</span></span><br><span class="line">            <span class="string">'575cce10b424d813cfe4875d3e82047b97ddef52741d546b8e289dc6935b'</span></span><br><span class="line">            <span class="string">'3ece0462db0a22b8e7'</span>)</span><br><span class="line">nonce = <span class="string">b'0CoJUm6Qyw8W8jud'</span></span><br><span class="line">pub_key = <span class="string">'010001'</span></span><br></pre></td></tr></table></figure>
+<h3 id="生成随机密匙"><a href="#生成随机密匙" class="headerlink" title="生成随机密匙"></a>生成随机密匙</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create_secret_key</span><span class="params">(size)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> binascii.hexlify(os.urandom(size))[:<span class="number">16</span>] <span class="comment"># 使用库 binascii</span></span><br></pre></td></tr></table></figure>
+<h3 id="AES-加密"><a href="#AES-加密" class="headerlink" title="AES 加密"></a>AES 加密</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">aes_encrypt</span><span class="params">(text, sec_key)</span>:</span></span><br><span class="line">    pad = <span class="number">16</span> - len(text) % <span class="number">16</span></span><br><span class="line">    text = text + bytearray([pad] * pad)</span><br><span class="line">    encryptor = AES.new(sec_key, <span class="number">2</span>, <span class="string">b'0102030405060708'</span>)</span><br><span class="line">    ciphertext = encryptor.encrypt(text)</span><br><span class="line">    <span class="keyword">return</span> base64.b64encode(ciphertext)</span><br></pre></td></tr></table></figure>
+<h3 id="RSA-加密"><a href="#RSA-加密" class="headerlink" title="RSA 加密"></a>RSA 加密</h3><blockquote>
+<p>RSA 加密采用非常规填充方式，既不是PKCS1也不是PKCS1_OAEP，网易的做法是直接向前补0<br> 这样加密出来的密文有个特点：加密过程没有随机因素，明文多次加密后得到的密文是相同的<br> 算法选取2个很大的质数p,q，得到它们的乘积n，然后选取e,d满足e*d = 1 mod (p-1)(q-1)</p>
+</blockquote>
+<p>因此 RSA 的加密算法应该为 </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rsa_encrypt</span><span class="params">(text, pub_key, modulus)</span>:</span></span><br><span class="line">    text = text[::<span class="number">-1</span>]</span><br><span class="line">    rs = pow(int(binascii.hexlify(text), <span class="number">16</span>),</span><br><span class="line">             int(pub_key, <span class="number">16</span>), int(modulus, <span class="number">16</span>))</span><br><span class="line">    <span class="keyword">return</span> format(rs, <span class="string">'x'</span>).zfill(<span class="number">256</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="组合登录"><a href="#组合登录" class="headerlink" title="组合登录"></a>组合登录</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">login_cell_phone</span><span class="params">(number,password)</span>:</span></span><br><span class="line">    md_create = hashlib.md5()</span><br><span class="line">    md_create.update(password.encode(<span class="string">'utf-8'</span>)) <span class="comment">#计算密码的md5</span></span><br><span class="line">    text = &#123;</span><br><span class="line">         <span class="string">'phone'</span>: number,</span><br><span class="line">         <span class="string">'password'</span>: md_create.hexdigest(),</span><br><span class="line">         <span class="string">'rememberLogin'</span>: <span class="string">'true'</span></span><br><span class="line">    &#125;</span><br><span class="line">    text = json.dumps(text).encode(<span class="string">'utf-8'</span>) <span class="comment">#获取 JSON 字符串</span></span><br><span class="line">    sec_key = create_secret_key(<span class="number">16</span>) <span class="comment">#第二次加密使用的密匙</span></span><br><span class="line">    result = aes_encrypt(text, nonce) <span class="comment">#第一次使用默认密匙加密的结果</span></span><br><span class="line">    enc_text = aes_encrypt(result, sec_key) <span class="comment">#加密第一次的结果为params</span></span><br><span class="line">    enc_sec_key = rsa_encrypt(sec_key, pub_key, MODULUS)</span><br><span class="line">    data = &#123;</span><br><span class="line">        <span class="string">'params'</span>: enc_text,</span><br><span class="line">        <span class="string">'encSecKey'</span>: enc_sec_key</span><br><span class="line">    &#125;</span><br><span class="line">    response = requests.post(<span class="string">'https://music.163.com/weapi/login/cellphone'</span>, data=data)</span><br></pre></td></tr></table></figure>
+<p>这样一看是没有问题了，可是当Run时，返回的登录结果为</p>
+<blockquote>
+<p>{“code”:-460,”msg”:”Cheating”}</p>
+</blockquote>
+<p>是因为缺少了 Headers ，因此添加一个 Headers 并修改为</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">header = &#123;</span><br><span class="line">        <span class="string">'User-Agent'</span>: <span class="string">'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">login_cell_phone</span><span class="params">(number,password)</span>:</span></span><br><span class="line">    md_create = hashlib.md5()</span><br><span class="line">    md_create.update(password.encode(<span class="string">'utf-8'</span>)) <span class="comment">#计算密码的md5</span></span><br><span class="line">    text = &#123;</span><br><span class="line">         <span class="string">'phone'</span>: number,</span><br><span class="line">         <span class="string">'password'</span>: md_create.hexdigest(),</span><br><span class="line">         <span class="string">'rememberLogin'</span>: <span class="string">'true'</span></span><br><span class="line">    &#125;</span><br><span class="line">    text = json.dumps(text).encode(<span class="string">'utf-8'</span>) <span class="comment">#获取 JSON 字符串</span></span><br><span class="line">    sec_key = create_secret_key(<span class="number">16</span>) <span class="comment">#第二次加密使用的密匙</span></span><br><span class="line">    result = aes_encrypt(text, nonce) <span class="comment">#第一次使用默认密匙加密的结果</span></span><br><span class="line">    enc_text = aes_encrypt(result, sec_key) <span class="comment">#加密第一次的结果为params</span></span><br><span class="line">    enc_sec_key = rsa_encrypt(sec_key, pub_key, MODULUS)</span><br><span class="line">    data = &#123;</span><br><span class="line">        <span class="string">'params'</span>: enc_text,</span><br><span class="line">        <span class="string">'encSecKey'</span>: enc_sec_key</span><br><span class="line">    &#125;</span><br><span class="line">    response = requests.post(<span class="string">'https://music.163.com/weapi/login/cellphone'</span>, data=data, headers=header)</span><br><span class="line">    obj = json.loads(response.text)</span><br><span class="line">    print(str(obj[<span class="string">"profile"</span>][<span class="string">"nickname"</span>]) + <span class="string">" Login success !"</span>)</span><br></pre></td></tr></table></figure>
+<p>此时，当<strong>账户密码正确时</strong>就能返回登录账号的信息了</p>
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES</span><br><span class="line"><span class="keyword">from</span> future.builtins <span class="keyword">import</span> int, pow</span><br><span class="line"></span><br><span class="line">MODULUS = (<span class="string">'00e0b509f6259df8642dbc35662901477df22677ec152b5ff68ace615bb7'</span></span><br><span class="line">            <span class="string">'b725152b3ab17a876aea8a5aa76d2e417629ec4ee341f56135fccf695280'</span></span><br><span class="line">            <span class="string">'104e0312ecbda92557c93870114af6c9d05c4f7f0c3685b7a46bee255932'</span></span><br><span class="line">            <span class="string">'575cce10b424d813cfe4875d3e82047b97ddef52741d546b8e289dc6935b'</span></span><br><span class="line">            <span class="string">'3ece0462db0a22b8e7'</span>)</span><br><span class="line">header = &#123;</span><br><span class="line">        <span class="string">'User-Agent'</span>: <span class="string">'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36'</span></span><br><span class="line">&#125;</span><br><span class="line">nonce = <span class="string">b'0CoJUm6Qyw8W8jud'</span></span><br><span class="line">pub_key = <span class="string">'010001'</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rsa_encrypt</span><span class="params">(text, pub_key, modulus)</span>:</span></span><br><span class="line">    text = text[::<span class="number">-1</span>]</span><br><span class="line">    rs = pow(int(binascii.hexlify(text), <span class="number">16</span>),</span><br><span class="line">             int(pub_key, <span class="number">16</span>), int(modulus, <span class="number">16</span>))</span><br><span class="line">    <span class="keyword">return</span> format(rs, <span class="string">'x'</span>).zfill(<span class="number">256</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create_secret_key</span><span class="params">(size)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> binascii.hexlify(os.urandom(size))[:<span class="number">16</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">aes_encrypt</span><span class="params">(text, sec_key)</span>:</span></span><br><span class="line">    pad = <span class="number">16</span> - len(text) % <span class="number">16</span></span><br><span class="line">    text = text + bytearray([pad] * pad)</span><br><span class="line">    encryptor = AES.new(sec_key, <span class="number">2</span>, <span class="string">b'0102030405060708'</span>)</span><br><span class="line">    ciphertext = encryptor.encrypt(text)</span><br><span class="line">    <span class="keyword">return</span> base64.b64encode(ciphertext)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">login_cell_phone</span><span class="params">(number,password)</span>:</span></span><br><span class="line">    md_create = hashlib.md5()</span><br><span class="line">    md_create.update(password.encode(<span class="string">'utf-8'</span>))  <span class="comment"># 计算密码的md5</span></span><br><span class="line">    text = &#123;</span><br><span class="line">        <span class="string">'phone'</span>: number,</span><br><span class="line">        <span class="string">'password'</span>: md_create.hexdigest(),</span><br><span class="line">        <span class="string">'rememberLogin'</span>: <span class="string">'true'</span></span><br><span class="line">    &#125;</span><br><span class="line">    text = json.dumps(text).encode(<span class="string">'utf-8'</span>)  <span class="comment"># 获取 JSON 字符串</span></span><br><span class="line">    sec_key = create_secret_key(<span class="number">16</span>)  <span class="comment"># 第二次加密使用的密匙</span></span><br><span class="line">    result = aes_encrypt(text, nonce)  <span class="comment"># 第一次使用默认密匙加密的结果</span></span><br><span class="line">    enc_text = aes_encrypt(result, sec_key)  <span class="comment"># 加密第一次的结果为params</span></span><br><span class="line">    enc_sec_key = rsa_encrypt(sec_key, pub_key, MODULUS)</span><br><span class="line">    data = &#123;</span><br><span class="line">        <span class="string">'params'</span>: enc_text,</span><br><span class="line">        <span class="string">'encSecKey'</span>: enc_sec_key</span><br><span class="line">    &#125;</span><br><span class="line">    response = requests.post(<span class="string">'https://music.163.com/weapi/login/cellphone'</span>, data=data, headers=header)</span><br><span class="line">    obj = json.loads(response.text)</span><br><span class="line">    print(str(obj[<span class="string">"profile"</span>][<span class="string">"nickname"</span>]) + <span class="string">" Login success !"</span>)</span><br><span class="line">    print(response.text)</span><br><span class="line"></span><br><span class="line">login_cell_phone(<span class="string">'your_number'</span>,<span class="string">'your_password'</span>)</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Ah !</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="https://blog.forgiveher.cn/2018/12/15/1544852143/" title="网易云音乐 Web 登录算法解密过程分析以及实现">https://blog.forgiveher.cn/2018/12/15/1544852143/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/逆向/" rel="tag"># 逆向</a>
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+            <a href="/tags/网易云音乐/" rel="tag"># 网易云音乐</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/14/1544801182/" rel="next" title="Frp 内网穿透配置和客户端自启">
+                <i class="fa fa-chevron-left"></i> Frp 内网穿透配置和客户端自启
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/16/1544945520/" rel="prev" title="名华慕课App算法解密过程以及软件实现">
+                名华慕课App算法解密过程以及软件实现 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/cav.png" alt="Ah !">
+            
+              <p class="site-author-name" itemprop="name">Ah !</p>
+              <div class="site-description motion-element" itemprop="description">当然是选择原谅她 - Ah! 的博客 - blog.forgiveher.cn 什么都略懂一点，生活更多彩一些</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/dirname" title="GitHub &rarr; https://github.com/dirname" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:i@forgiveher.cn" title="E-Mail &rarr; mailto:i@forgiveher.cn" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://weibo.com/u/5127801099" title="Sina Weibo &rarr; https://weibo.com/u/5127801099" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Sina Weibo</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://t.me/dirname" title="Telegram &rarr; https://t.me/dirname" rel="noopener" target="_blank"><i class="fa fa-fw fa-telegram"></i>Telegram</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://gitlab.com/dirname" title="GitLab &rarr; https://gitlab.com/dirname" rel="noopener" target="_blank"><i class="fa fa-fw fa-gitlab"></i>GitLab</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://shang.qq.com/wpa/qunwpa?idkey=7fb401b79dca61d03a81db9f898a4b361e7ff0b5bfe1f6289a9a8435768a3765" title="QQ Group &rarr; https://shang.qq.com/wpa/qunwpa?idkey=7fb401b79dca61d03a81db9f898a4b361e7ff0b5bfe1f6289a9a8435768a3765" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ Group</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blog.changwei.me" title="https://blog.changwei.me" rel="noopener" target="_blank">昌维's Blog</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.vicicode.com/" title="https://www.vicicode.com/" rel="noopener" target="_blank">猫叔's Blog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#登录分析"><span class="nav-number">1.</span> <span class="nav-text">登录分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#抓包"><span class="nav-number">1.1.</span> <span class="nav-text">抓包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#寻找-encSecKey-算法"><span class="nav-number">1.2.</span> <span class="nav-text">寻找 encSecKey 算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#静态分析算法"><span class="nav-number">1.3.</span> <span class="nav-text">静态分析算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#断点调试算法"><span class="nav-number">1.4.</span> <span class="nav-text">断点调试算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动静结合分析算法"><span class="nav-number">1.5.</span> <span class="nav-text">动静结合分析算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#验证算法"><span class="nav-number">1.6.</span> <span class="nav-text">验证算法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Python-实现登录"><span class="nav-number">2.</span> <span class="nav-text">Python 实现登录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装第三方库"><span class="nav-number">2.1.</span> <span class="nav-text">安装第三方库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编写加密函数"><span class="nav-number">2.2.</span> <span class="nav-text">编写加密函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#生成随机密匙"><span class="nav-number">2.2.1.</span> <span class="nav-text">生成随机密匙</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AES-加密"><span class="nav-number">2.2.2.</span> <span class="nav-text">AES 加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RSA-加密"><span class="nav-number">2.2.3.</span> <span class="nav-text">RSA 加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组合登录"><span class="nav-number">2.2.4.</span> <span class="nav-text">组合登录</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#完整代码"><span class="nav-number">2.3.</span> <span class="nav-text">完整代码</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ah !</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">站点总字数：</span>
+    
+    <span title="站点总字数">33k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    
+    <span title="站点阅读时长">30 分钟</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+    
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script src="/lib/reading_progress/reading_progress.js"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/next-boot.js?v=7.0.1"></script>
+
+
+  
+  <script src="/js/src/js.cookie.js?v=7.0.1"></script>
+  <script src="/js/src/scroll-cookie.js?v=7.0.1"></script>
+
+
+  
+
+  
+
+  
+  
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: true,
+    notify: true,
+    appId: 'UQgkQAD71sHC5kitwtSbJJDT-gzGzoHsz',
+    appKey: 'IIjgfxVbcT3TFul9fHhz5ifF',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+</script>
+
+
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<style>
+  .copy-btn {
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 20px;
+    color: #333;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+    
+    user-select: none;
+    outline: 0;
+  }
+
+  .highlight-wrap .copy-btn {
+    transition: opacity .3s ease-in-out;
+    opacity: 0;
+    padding: 2px 6px;
+    position: absolute;
+    
+      right: 4px;
+      top: 8px;
+    
+  }
+
+  .highlight-wrap:hover .copy-btn,
+  .highlight-wrap .copy-btn:focus {
+    opacity: 1;
+  }
+
+  .highlight-wrap {
+    position: relative;
+  }
+</style>
+<script>
+  $('.highlight').each(function(i, e) {
+    var $wrap = $('<div>').addClass('highlight-wrap');
+    $(e).after($wrap);
+    $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+      var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+        return $(e).text();
+      }).toArray().join('\n');
+      var ta = document.createElement('textarea');
+      var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+      ta.style.top = yPosition + 'px'; // Prevent page scroll
+      ta.style.position = 'absolute';
+      ta.style.opacity = '0';
+      ta.readOnly = true;
+      ta.value = code;
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, code.length);
+      ta.readOnly = false;
+      var result = document.execCommand('copy');
+      
+        if (result) $(this).text('复制成功');
+        else $(this).text('复制失败');
+      
+      ta.blur(); // For iOS
+      $(this).blur();
+    })).on('mouseleave', function(e) {
+      var $b = $(this).find('.copy-btn');
+      setTimeout(function() {
+        $b.text('复制');
+      }, 300);
+    }).append(e);
+  })
+</script>
+
+
+</body>
+</html>
