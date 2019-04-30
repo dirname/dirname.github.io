@@ -109,30 +109,28 @@
 
 
 
-  <meta name="description" content="测试环境 Windows 10 x64 Fiddler 5.0.20182.28034 ApkIDE 3.5.0.0 测试样本 名华慕课 Android 版 1.0.3 Python 3.6.8   捕获数据包使用 Fiddler 截获手机客户端的 HTTP 封包 , 如何使用 Fiddler 截获手机封包请自行 Google 这里不做过多阐释  request12345678910POST h">
-<meta name="keywords" content="逆向,算法">
+  <meta name="description" content="MacOS High Sierra Version 10.13.6（17G6030) NVIDIA Web Driver 387.10.10.10.40.124 CUDA Toolkit 10.0 cuDNN 7.5 NVIDIA Collective Communications Library (NCCL) 2.4.2-1 Python 3.6.8 Anaconda 2019.3 Xcode">
+<meta name="keywords" content="Tensorflow">
 <meta property="og:type" content="article">
-<meta property="og:title" content="名华慕课App算法解密过程以及软件实现">
-<meta property="og:url" content="https://blog.forgiveher.cn/2018/12/16/1544945520/index.html">
+<meta property="og:title" content="Mac 上编译 CUDA+Tensorflow">
+<meta property="og:url" content="https://blog.forgiveher.cn/2019/04/29/1556506356/index.html">
 <meta property="og:site_name" content="当然是选择原谅她">
-<meta property="og:description" content="测试环境 Windows 10 x64 Fiddler 5.0.20182.28034 ApkIDE 3.5.0.0 测试样本 名华慕课 Android 版 1.0.3 Python 3.6.8   捕获数据包使用 Fiddler 截获手机客户端的 HTTP 封包 , 如何使用 Fiddler 截获手机封包请自行 Google 这里不做过多阐释  request12345678910POST h">
+<meta property="og:description" content="MacOS High Sierra Version 10.13.6（17G6030) NVIDIA Web Driver 387.10.10.10.40.124 CUDA Toolkit 10.0 cuDNN 7.5 NVIDIA Collective Communications Library (NCCL) 2.4.2-1 Python 3.6.8 Anaconda 2019.3 Xcode">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://blog.forgiveher.cn/2018/12/16/1544945520/1.png">
-<meta property="og:image" content="https://blog.forgiveher.cn/2018/12/16/1544945520/2.png">
-<meta property="og:image" content="https://blog.forgiveher.cn/2018/12/16/1544945520/3.png">
-<meta property="og:image" content="https://blog.forgiveher.cn/2018/12/16/1544945520/4.png">
-<meta property="og:image" content="https://blog.forgiveher.cn/2018/12/16/1544945520/5.png">
-<meta property="og:image" content="https://blog.forgiveher.cn/2018/12/16/1544945520/6.png">
-<meta property="og:image" content="https://blog.forgiveher.cn/2018/12/16/1544945520/7.png">
-<meta property="og:image" content="https://blog.forgiveher.cn/2018/12/16/1544945520/8.png">
-<meta property="og:image" content="https://blog.forgiveher.cn/2018/12/16/1544945520/8.png">
-<meta property="og:image" content="https://blog.forgiveher.cn/2018/12/16/1544945520/10.png">
-<meta property="og:image" content="https://blog.forgiveher.cn/2018/12/16/1544945520/12.png">
-<meta property="og:updated_time" content="2019-04-29T03:03:27.000Z">
+<meta property="og:image" content="https://blog.forgiveher.cn/2019/04/29/1556506356/success.png">
+<meta property="og:image" content="https://blog.forgiveher.cn/2019/04/29/1556506356/success.png">
+<meta property="og:image" content="https://blog.forgiveher.cn/2019/04/29/1556506356/failed.png">
+<meta property="og:image" content="https://blog.forgiveher.cn/2019/04/29/1556506356/failed.png">
+<meta property="og:image" content="https://blog.forgiveher.cn/2019/04/29/1556506356/failed.png">
+<meta property="og:image" content="https://blog.forgiveher.cn/2019/04/29/1556506356/start.png">
+<meta property="og:image" content="https://blog.forgiveher.cn/2019/04/29/1556506356/bazel.png">
+<meta property="og:image" content="https://blog.forgiveher.cn/2019/04/29/1556506356/pip.png">
+<meta property="og:image" content="https://blog.forgiveher.cn/2019/04/29/1556506356/package.png">
+<meta property="og:updated_time" content="2019-04-29T23:59:31.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="名华慕课App算法解密过程以及软件实现">
-<meta name="twitter:description" content="测试环境 Windows 10 x64 Fiddler 5.0.20182.28034 ApkIDE 3.5.0.0 测试样本 名华慕课 Android 版 1.0.3 Python 3.6.8   捕获数据包使用 Fiddler 截获手机客户端的 HTTP 封包 , 如何使用 Fiddler 截获手机封包请自行 Google 这里不做过多阐释  request12345678910POST h">
-<meta name="twitter:image" content="https://blog.forgiveher.cn/2018/12/16/1544945520/1.png">
+<meta name="twitter:title" content="Mac 上编译 CUDA+Tensorflow">
+<meta name="twitter:description" content="MacOS High Sierra Version 10.13.6（17G6030) NVIDIA Web Driver 387.10.10.10.40.124 CUDA Toolkit 10.0 cuDNN 7.5 NVIDIA Collective Communications Library (NCCL) 2.4.2-1 Python 3.6.8 Anaconda 2019.3 Xcode">
+<meta name="twitter:image" content="https://blog.forgiveher.cn/2019/04/29/1556506356/success.png">
 
 
 
@@ -141,7 +139,7 @@
 
 
 
-  <link rel="canonical" href="https://blog.forgiveher.cn/2018/12/16/1544945520/">
+  <link rel="canonical" href="https://blog.forgiveher.cn/2019/04/29/1556506356/">
 
 
 
@@ -151,7 +149,7 @@
   };
 </script>
 
-  <title>名华慕课App算法解密过程以及软件实现 | 当然是选择原谅她</title>
+  <title>Mac 上编译 CUDA+Tensorflow | 当然是选择原谅她</title>
   
 
 
@@ -360,7 +358,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.forgiveher.cn/2018/12/16/1544945520/">
+    <link itemprop="mainEntityOfPage" href="https://blog.forgiveher.cn/2019/04/29/1556506356/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ah !">
@@ -377,7 +375,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">名华慕课App算法解密过程以及软件实现
+          <h1 class="post-title" itemprop="name headline">Mac 上编译 CUDA+Tensorflow
 
               
             
@@ -403,7 +401,7 @@
                 
               
 
-              <time title="创建时间：2018-12-16 15:32:00" itemprop="dateCreated datePublished" datetime="2018-12-16T15:32:00+08:00">2018-12-16</time>
+              <time title="创建时间：2019-04-29 10:52:36" itemprop="dateCreated datePublished" datetime="2019-04-29T10:52:36+08:00">2019-04-29</time>
             
 
             
@@ -420,7 +418,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-04-29 11:03:27" itemprop="dateModified" datetime="2019-04-29T11:03:27+08:00">2019-04-29</time>
+                <time title="修改时间：2019-04-30 07:59:31" itemprop="dateModified" datetime="2019-04-30T07:59:31+08:00">2019-04-30</time>
               
             
           </span>
@@ -437,7 +435,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Disassembler/" itemprop="url" rel="index"><span itemprop="name">Disassembler</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Other/" itemprop="url" rel="index"><span itemprop="name">Other</span></a></span>
 
                 
                 
@@ -456,8 +454,8 @@
                 </span>
             
                 <span class="post-meta-item-text">评论数：</span>
-                <a href="/2018/12/16/1544945520/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/12/16/1544945520/" itemprop="commentCount"></span>
+                <a href="/2019/04/29/1556506356/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/04/29/1556506356/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -479,7 +477,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">9.1k</span>
+                <span title="本文字数">7.9k</span>
               
 
               
@@ -493,7 +491,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">8 分钟</span>
+                <span title="阅读时长">7 分钟</span>
               
             </div>
           
@@ -514,59 +512,131 @@
 
       
         <ul>
-<li>测试环境 Windows 10 x64</li>
-<li>Fiddler 5.0.20182.28034</li>
-<li>ApkIDE 3.5.0.0</li>
-<li>测试样本 名华慕课 Android 版 1.0.3</li>
+<li>MacOS High Sierra Version 10.13.6（17G6030)</li>
+<li>NVIDIA Web Driver 387.10.10.10.40.124</li>
+<li>CUDA Toolkit 10.0</li>
+<li>cuDNN 7.5</li>
+<li>NVIDIA Collective Communications Library (NCCL) 2.4.2-1</li>
 <li>Python 3.6.8</li>
+<li>Anaconda 2019.3</li>
+<li>Xcode 9.4</li>
+<li>Command Line Tool for Xcode 9.4</li>
+<li>Jdk 8u211</li>
+<li>Bazel 0.19.2</li>
 </ul>
 <hr>
-<h1 id="捕获数据包"><a href="#捕获数据包" class="headerlink" title="捕获数据包"></a>捕获数据包</h1><p>使用 Fiddler 截获手机客户端的 HTTP 封包 , 如何使用 Fiddler 截获手机封包请自行 Google 这里不做过多阐释</p>
-<p><img src="/2018/12/16/1544945520/1.png" alt="拦截到的数据包"></p>
-<figure class="highlight"><figcaption><span>request</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">POST</span> <span class="string">http://api.mooc.minghuaetc.com/v1</span> HTTP/1.1</span><br><span class="line"><span class="attribute">Cookie</span>: moocvk=*************;moocsk=**************;</span><br><span class="line"><span class="attribute">Content-Length</span>: 89</span><br><span class="line"><span class="attribute">Content-Type</span>: application/x-www-form-urlencoded</span><br><span class="line"><span class="attribute">Host</span>: api.mooc.minghuaetc.com</span><br><span class="line"><span class="attribute">Connection</span>: Keep-Alive</span><br><span class="line"><span class="attribute">User-Agent</span>: Mozilla/5.0 (Linux; U; Android 8.0.0; en-gb; SM-G9650 Build/R16NW) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1</span><br><span class="line"><span class="attribute">Accept-Encoding</span>: gzip</span><br><span class="line"></span><br><span class="line">cmd=course.subject&amp;client=chinamoocs&amp;level=2&amp;spoc=1&amp;sign=125d379b0b53f2c43214721ad3732e4d</span><br></pre></td></tr></table></figure>
-<p>出于安全考虑已经将 Cookies 信息做处理实际测试中以实际值为准 , 可以看到提交的字段有 <strong>cmd</strong>、<strong>client</strong>、<strong>level、<strong>spoc</strong>、<strong>sign</strong></strong></p>
-<h1 id="搜索方法"><a href="#搜索方法" class="headerlink" title="搜索方法"></a>搜索方法</h1><p>打开 ApkIDE 加载名华慕课安卓客户端 , 然后使用全局搜索 <strong>cmd</strong> 字段内容 <strong>course.subject</strong></p>
-<p><img src="/2018/12/16/1544945520/2.png" alt="搜索方法"></p>
-<p>可以看到使用了 <stong>course.subject 的有两个类 </stong></p>
+<table>
+<thead>
+<tr>
+<th>Python Version</th>
+<th>Status</th>
+<th>Branch</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>3.6.8</strong></td>
+<td><img src="/2019/04/29/1556506356/success.png" alt="Build Status"></td>
+<td>r1.12</td>
+</tr>
+<tr>
+<td><strong>3.6.8</strong></td>
+<td><img src="/2019/04/29/1556506356/success.png" alt="Build Status"></td>
+<td>r1.12.2</td>
+</tr>
+<tr>
+<td><strong>3.6.8</strong></td>
+<td><img src="/2019/04/29/1556506356/failed.png" alt="Build Status"></td>
+<td>r1.13</td>
+</tr>
+<tr>
+<td><strong>3.6.8</strong></td>
+<td><img src="/2019/04/29/1556506356/failed.png" alt="Build Status"></td>
+<td>r1.14</td>
+</tr>
+<tr>
+<td><strong>3.7 +</strong></td>
+<td><img src="/2019/04/29/1556506356/failed.png" alt="Build Status"></td>
+<td>All</td>
+</tr>
+</tbody>
+</table>
+<h1 id="编译前准备"><a href="#编译前准备" class="headerlink" title="编译前准备"></a>编译前准备</h1><ul>
+<li>1.禁用 System Integrity Protection（SIP）</li>
+<li>2.安装 Xcode 9.4</li>
+<li>3.安装 Anaconda 并安装 Python 3.6.8</li>
+<li>4.安装 NVIDIA Runtime<ul>
+<li>1.安装 NVIDIA Web Driver</li>
+<li>2.安装 CUDA Toolkit</li>
+<li>3.安装 cuDNN</li>
+<li>4.安装 NVIDIA Collective Communications Library (NCCL)</li>
+</ul>
+</li>
+<li>5.使用 Homebrew 安装库<ul>
+<li>1.安装 coreutils</li>
+<li>2.安装 openmp</li>
+</ul>
+</li>
+<li>6.安装 Jdk 8</li>
+<li>7.安装 Bazel</li>
+</ul>
+<h2 id="禁用-SIP"><a href="#禁用-SIP" class="headerlink" title="禁用 SIP"></a>禁用 SIP</h2><p>打开终端输入，关闭系统完整性保护<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">csrutil <span class="built_in">disable</span>; reboot</span><br></pre></td></tr></table></figure></p>
+<h2 id="安装-Xcode-9-4"><a href="#安装-Xcode-9-4" class="headerlink" title="安装 Xcode 9.4"></a>安装 Xcode 9.4</h2><p>下载 Xcode9.4.xip<br><a href="https://developer.apple.com/download/more/" target="_blank" rel="noopener">苹果开发者下载平台</a><br><a href="https://download.developer.apple.com/Developer_Tools/Xcode_9.4/Xcode_9.4.xip" target="_blank" rel="noopener">Xcode 9.4</a><br>随后解压拷贝至 Applications, 打开终端运行将 Xcode 9.4 设置为默认<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo xcode-select -s /Applications/Xcode9.4.app</span><br></pre></td></tr></table></figure></p>
+<p>若你之前安装过其他版本的Xcode可能会安装匹配的Command Line Tool，需要更换其版本<br><a href>Command Line Tool for 9.4</a></p>
+<h2 id="安装-Anaconda"><a href="#安装-Anaconda" class="headerlink" title="安装 Anaconda"></a>安装 Anaconda</h2><p>在官网下载 Anaconda 并安装<br><a href="https://www.anaconda.com/distribution/#download-section" target="_blank" rel="noopener">Anaconda 下载页面</a><br>官网安装文档<br><a href="https://docs.anaconda.com/anaconda/install/mac-os/" target="_blank" rel="noopener">Anaconda 安装向导</a><br>安装完成后，打开终端更换Python版本为3.6.8<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install python=3.6.8</span><br></pre></td></tr></table></figure></p>
+<p>随后，输入 Python 验证是否为3.6.8版本<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(base) iMac:~ admin$ python</span><br><span class="line">Python 3.6.8 |Anaconda, Inc.| (default, Dec 29 2018, 19:04:46) </span><br><span class="line">[GCC 4.2.1 Compatible Clang 4.0.1 (tags/RELEASE_401/final)] on darwin</span><br><span class="line">Type <span class="string">"help"</span>, <span class="string">"copyright"</span>, <span class="string">"credits"</span> or <span class="string">"license"</span> <span class="keyword">for</span> more information.</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="安装-NVIDIA-Runtime"><a href="#安装-NVIDIA-Runtime" class="headerlink" title="安装 NVIDIA Runtime"></a>安装 NVIDIA Runtime</h2><ul>
+<li>1.安装 NVIDIA Web Driver</li>
+<li>2.安装 CUDA Toolkit</li>
+<li>3.安装 cuDNN</li>
+<li>4.安装 NVIDIA Collective Communications Library (NCCL)</li>
+</ul>
+<h3 id="安装-Web-Driver"><a href="#安装-Web-Driver" class="headerlink" title="安装 Web Driver"></a>安装 Web Driver</h3><p>选择与自己系统匹配的版本，下载下来并安装<br><a href="https://www.tonymacx86.com/nvidia-drivers/" target="_blank" rel="noopener">下载地址</a></p>
+<h3 id="安装-CUDA-Toolkit"><a href="#安装-CUDA-Toolkit" class="headerlink" title="安装 CUDA Toolkit"></a>安装 CUDA Toolkit</h3><p>在 archive 选择 CUDA Toolkit 10.0下载<br><a href="https://developer.nvidia.com/cuda-toolkit-archive]" target="_blank" rel="noopener">CUDA Toolkit Archive</a><br>下载后安装，并配置变量到 .bash_profile<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> CUDA_HOME=/usr/<span class="built_in">local</span>/cuda</span><br><span class="line"><span class="built_in">export</span> DYLD_LIBRARY_PATH=/usr/<span class="built_in">local</span>/cuda/lib:/usr/<span class="built_in">local</span>/cuda/extras/CUPTI/lib</span><br><span class="line"><span class="built_in">export</span> LD_LIBRARY_PATH=<span class="variable">$DYLD_LIBRARY_PATH</span></span><br><span class="line">PATH=<span class="variable">$DYLD_LIBRARY_PATH</span>:<span class="variable">$PATH</span>:/Developer/NVIDIA/CUDA-10.0/bin</span><br></pre></td></tr></table></figure></p>
+<p>随后输入 nvcc -V 测试是否配置正确<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(base) iMac:~ admin$ nvcc -V</span><br><span class="line">nvcc: NVIDIA (R) Cuda compiler driver</span><br><span class="line">Copyright (c) 2005-2018 NVIDIA Corporation</span><br><span class="line">Built on Sat_Aug_25_21:08:56_CDT_2018</span><br><span class="line">Cuda compilation tools, release 10.0, V10.0.130</span><br></pre></td></tr></table></figure></p>
+<p>检测 CUDA 是否能正常工作，切换目录到 CUDA Samples<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /Developer/NVIDIA/CUDA-10.0/samples/1_Utilities/deviceQuery</span><br></pre></td></tr></table></figure></p>
+<p>若出现以下情况，请说明 Command Line Tool 版本不受支持，请更换版本<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvcc fatal   : The version (<span class="string">'8.0'</span>) of the host compiler (<span class="string">'clang'</span>) is not supported</span><br></pre></td></tr></table></figure></p>
+<h3 id="安装-cuDNN"><a href="#安装-cuDNN" class="headerlink" title="安装 cuDNN"></a>安装 cuDNN</h3><p>下载 cuDNN 并解压到 CUDA 目录下，注意选择对应的 CUDA 版本<br><a href="https://developer.nvidia.com/rdp/cudnn-archive" target="_blank" rel="noopener">cuDNN 下载地址</a><br>下载后解压到 CUDA 目录<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">(base) iMac:cuda admin$ tree</span><br><span class="line">.</span><br><span class="line">├── NVIDIA_SLA_cuDNN_Support.txt</span><br><span class="line">├── include</span><br><span class="line">│   └── cudnn.h</span><br><span class="line">└── lib</span><br><span class="line">    ├── libcudnn.7.dylib</span><br><span class="line">    ├── libcudnn.dylib -&gt; libcudnn.7.dylib</span><br><span class="line">    └── libcudnn_static.a</span><br><span class="line"></span><br><span class="line">2 directories, 5 files</span><br></pre></td></tr></table></figure></p>
+<h3 id="安装-NCCL"><a href="#安装-NCCL" class="headerlink" title="安装 NCCL"></a>安装 NCCL</h3><p>下载 NCCL<br><a href="https://developer.nvidia.com/nccl/nccl-download" target="_blank" rel="noopener">NCCL 下载地址</a><br>下载后解压，并配置软链接，注意替换成自己下载的版本<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">brew install xz</span><br><span class="line">xz -d nccl_&lt;verison&gt;+cuda10.0_x86_64.txz</span><br><span class="line">tar xvf nccl_&lt;verison&gt;+cuda10.0_x86_64.tar</span><br><span class="line"></span><br><span class="line">sudo mkdir -p /usr/<span class="built_in">local</span>/nccl</span><br><span class="line"><span class="built_in">cd</span> nccl_&lt;version&gt;+cuda10.0_x86_64</span><br><span class="line">sudo mv * /usr/<span class="built_in">local</span>/nccl</span><br><span class="line">sudo mkdir -p /usr/<span class="built_in">local</span>/include/third_party/nccl</span><br><span class="line">sudo ln -s /usr/<span class="built_in">local</span>/nccl/include/nccl.h /usr/<span class="built_in">local</span>/include/third_party/nccl</span><br></pre></td></tr></table></figure></p>
+<h2 id="Homebrew-部分"><a href="#Homebrew-部分" class="headerlink" title="Homebrew 部分"></a>Homebrew 部分</h2><p>安装 coreutils<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install coreutils</span><br></pre></td></tr></table></figure></p>
+<p>安装 openmp<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install cliutils/apple/libomp</span><br></pre></td></tr></table></figure></p>
+<h2 id="安装-Jdk"><a href="#安装-Jdk" class="headerlink" title="安装 Jdk"></a>安装 Jdk</h2><p>下载 Jdk 并根据向导安装 (解决Bazel安装问题，请下载JDK8)<br><a href="https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="noopener">Jdk 下载地址</a><br>验证 Jdk 是否安装成功<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(base) iMac:cuda admin$ java -version</span><br><span class="line">java version <span class="string">"1.8.0_211"</span></span><br><span class="line">Java(TM) SE Runtime Environment (build 1.8.0_211-b12)</span><br><span class="line">Java HotSpot(TM) 64-Bit Server VM (build 25.211-b12, mixed mode)</span><br><span class="line">(base) iMac:cuda admin$</span><br></pre></td></tr></table></figure></p>
+<h2 id="安装-Bazel"><a href="#安装-Bazel" class="headerlink" title="安装 Bazel"></a>安装 Bazel</h2><p>使用新版本的 Bazel 可能会导致编译失败，现在需要下载低版本（0.19.2）的 Bazel 来进行编译</p>
+<p><a href="https://github-production-release-asset-2e65be.s3.amazonaws.com/20773773/22663680-ec21-11e8-83e2-5cc5d2d49967?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20190429%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20190429T015144Z&amp;X-Amz-Expires=300&amp;X-Amz-Signature=d3db42d266a806ba6187ba18721eac488bc1ed96efab06f986478060718be94e&amp;X-Amz-SignedHeaders=host&amp;actor_id=32116910&amp;response-content-disposition=attachment%3B%20filename%3Dbazel-0.19.2-installer-darwin-x86_64.sh&amp;response-content-type=application%2Foctet-stream" target="_blank" rel="noopener">Bazel 0.19.2</a></p>
+<p>下载安装完成后配置环境变量<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH=<span class="string">"<span class="variable">$PATH</span>:<span class="variable">$HOME</span>/bin"</span></span><br></pre></td></tr></table></figure></p>
+<p>环境变量的配置根据 Bazel 安装的位置来进行确认，这里默认安装的是用户的主目录</p>
+<h2 id="激活环境变量"><a href="#激活环境变量" class="headerlink" title="激活环境变量"></a>激活环境变量</h2><p>打开控制台输入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> .bash_profile</span><br></pre></td></tr></table></figure></p>
+<h1 id="开始编译"><a href="#开始编译" class="headerlink" title="开始编译"></a>开始编译</h1><ul>
+<li>1.下载源码</li>
+<li>2.编译配置</li>
+<li>3.开始编译<ul>
+<li>1.Bazel 编译</li>
+<li>2.PIP 包编译</li>
+</ul>
+</li>
+</ul>
+<h2 id="下载-Tensorflow-源码"><a href="#下载-Tensorflow-源码" class="headerlink" title="下载 Tensorflow 源码"></a>下载 Tensorflow 源码</h2><p>从 github 上下载 tensorflow的源码<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/tensorflow/tensorflow.git</span><br><span class="line"><span class="built_in">cd</span> tensorflow</span><br></pre></td></tr></table></figure></p>
+<p>默认使用 master 分支，如需要调整成其他分支，请如下配置（r1.14以上版本 <strong>Bazel</strong> 需要 <strong>0.24</strong> 以上如需编译请更换 <strong>Bazel 版本</strong>）<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout branch_name  <span class="comment"># r1.9, r1.10, etc.</span></span><br></pre></td></tr></table></figure></p>
+<p>由于 Mac 不支持 <strong>align(sizeof(T))</strong> 所以需要将他们移除<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sed -i -e <span class="string">"s/ __align__(sizeof(T))//g"</span> tensorflow/core/kernels/concat_lib_gpu_impl.cu.cc</span><br><span class="line">sed -i -e <span class="string">"s/ __align__(sizeof(T))//g"</span> tensorflow/core/kernels/depthwise_conv_op_gpu.cu.cc</span><br><span class="line">sed -i -e <span class="string">"s/ __align__(sizeof(T))//g"</span> tensorflow/core/kernels/split_lib_gpu.cu.cc</span><br></pre></td></tr></table></figure></p>
+<h2 id="配置编译"><a href="#配置编译" class="headerlink" title="配置编译"></a>配置编译</h2><p>打开控制台输入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./configure</span><br></pre></td></tr></table></figure></p>
+<p><strong>根据提示进行配置，除了是否使用 CUDA Support 其他都默认写 No</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">(base) iMac:tensorflow admin$ ./configure</span><br><span class="line">WARNING: --batch mode is deprecated. Please instead explicitly shut down your Bazel server using the <span class="built_in">command</span> <span class="string">"bazel shutdown"</span>.</span><br><span class="line">You have bazel 0.19.2 installed.</span><br><span class="line">Please specify the location of python. [Default is /Users/admin/anaconda3/bin/python]: </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Found possible Python library paths:</span><br><span class="line">  /Users/admin/anaconda3/lib/python3.7/site-packages</span><br><span class="line">Please input the desired Python library path to use.  Default is [/Users/admin/anaconda3/lib/python3.7/site-packages]</span><br><span class="line"></span><br><span class="line">Do you wish to build TensorFlow with XLA JIT support? [y/N]: n</span><br><span class="line">No XLA JIT support will be enabled <span class="keyword">for</span> TensorFlow.</span><br><span class="line"></span><br><span class="line">Do you wish to build TensorFlow with OpenCL SYCL support? [y/N]: n</span><br><span class="line">No OpenCL SYCL support will be enabled <span class="keyword">for</span> TensorFlow.</span><br><span class="line"></span><br><span class="line">Do you wish to build TensorFlow with ROCm support? [y/N]: n</span><br><span class="line">No ROCm support will be enabled <span class="keyword">for</span> TensorFlow.</span><br><span class="line"></span><br><span class="line">Do you wish to build TensorFlow with CUDA support? [y/N]: y</span><br><span class="line">CUDA support will be enabled <span class="keyword">for</span> TensorFlow.</span><br><span class="line"></span><br><span class="line">Please specify the CUDA SDK version you want to use. [Leave empty to default to CUDA 10.0]:     </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Please specify the location <span class="built_in">where</span> CUDA 10.0 toolkit is installed. Refer to README.md <span class="keyword">for</span> more details. [Default is /usr/<span class="built_in">local</span>/cuda]: </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Please specify the cuDNN version you want to use. [Leave empty to default to cuDNN 7]: 7.5</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Please specify the location <span class="built_in">where</span> cuDNN 7 library is installed. Refer to README.md <span class="keyword">for</span> more details. [Default is /usr/<span class="built_in">local</span>/cuda]: /Developer/NVIDIA/CUDA-10.0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Please specify a list of comma-separated Cuda compute capabilities you want to build with.</span><br><span class="line">You can find the compute capability of your device at: https://developer.nvidia.com/cuda-gpus.</span><br><span class="line">Please note that each additional compute capability significantly increases your build time and binary size. [Default is: 3.5,7.0]: 6.1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Do you want to use clang as CUDA compiler? [y/N]: n</span><br><span class="line">nvcc will be used as CUDA compiler.</span><br><span class="line"></span><br><span class="line">Please specify <span class="built_in">which</span> gcc should be used by nvcc as the host compiler. [Default is /usr/bin/gcc]: </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Do you wish to build TensorFlow with MPI support? [y/N]: </span><br><span class="line">No MPI support will be enabled <span class="keyword">for</span> TensorFlow.</span><br><span class="line"></span><br><span class="line">Please specify optimization flags to use during compilation when bazel option <span class="string">"--config=opt"</span> is specified [Default is -march=native -Wno-sign-compare]: </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Would you like to interactively configure ./WORKSPACE <span class="keyword">for</span> Android builds? [y/N]: </span><br><span class="line">Not configuring the WORKSPACE <span class="keyword">for</span> Android builds.</span><br><span class="line"></span><br><span class="line">Preconfigured Bazel build configs. You can use any of the below by adding <span class="string">"--config=&lt;&gt;"</span> to your build <span class="built_in">command</span>. See .bazelrc <span class="keyword">for</span> more details.</span><br><span class="line">	--config=mkl         	<span class="comment"># Build with MKL support.</span></span><br><span class="line">	--config=monolithic  	<span class="comment"># Config for mostly static monolithic build.</span></span><br><span class="line">	--config=gdr         	<span class="comment"># Build with GDR support.</span></span><br><span class="line">	--config=verbs       	<span class="comment"># Build with libverbs support.</span></span><br><span class="line">	--config=ngraph      	<span class="comment"># Build with Intel nGraph support.</span></span><br><span class="line">	--config=dynamic_kernels	<span class="comment"># (Experimental) Build kernels into separate shared objects.</span></span><br><span class="line">Preconfigured Bazel build configs to DISABLE default on features:</span><br><span class="line">	--config=noaws       	<span class="comment"># Disable AWS S3 filesystem support.</span></span><br><span class="line">	--config=nogcp       	<span class="comment"># Disable GCP support.</span></span><br><span class="line">	--config=nohdfs      	<span class="comment"># Disable HDFS support.</span></span><br><span class="line">	--config=noignite    	<span class="comment"># Disable Apacha Ignite support.</span></span><br><span class="line">	--config=nokafka     	<span class="comment"># Disable Apache Kafka support.</span></span><br><span class="line">	--config=nonccl      	<span class="comment"># Disable NVIDIA NCCL support.</span></span><br><span class="line">Configuration finished</span><br></pre></td></tr></table></figure></p>
+<p>其中 Additional compute capability significantly GPU计算能力需要到官网找到你的设备，然后填写数值或者安装 CUDA-Z查看</p>
+<p><a href="https://developer.nvidia.com/cuda-gpus" target="_blank" rel="noopener">点击查看文档地址</a></p>
+<h2 id="开始编译-1"><a href="#开始编译-1" class="headerlink" title="开始编译"></a>开始编译</h2><p>先使用 Bazel 进行编译</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bazel build --config=cuda --config=opt --action_env PATH --action_env LD_LIBRARY_PATH --action_env DYLD_LIBRARY_PATH //tensorflow/tools/pip_package:build_pip_package</span><br></pre></td></tr></table></figure>
+<p>下图为开始编译</p>
+<p><img src="/2019/04/29/1556506356/start.png" alt="Start Build"></p>
+<p>编译的时间需要根据不同的情况确定，这里大概花了1小时左右的时间，显示编译完成后，开始编译pip安装包</p>
+<p><img src="/2019/04/29/1556506356/bazel.png" alt="Finish Build"></p>
+<p>Bazel 编译完成后，开始编译PIP安装包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg</span><br></pre></td></tr></table></figure>
+<p><img src="/2019/04/29/1556506356/pip.png" alt="Finish Build"></p>
+<p>上图编译完成后会在 </p>
 <blockquote>
-<p>com/wisedu/mooccloud/mhaetc/phone/ui/HomeActivity<br>com/wisedu/mooccloud/mhaetc/phone/service/ZhiTuService</p>
+<p>/tmp/tensorflow_pkg</p>
 </blockquote>
-<p>根据类名推测分析 , 我们需要进行分析的为 <strong>HomeActivity</strong></p>
-<p>查看其 Java 源代码 , 静态分析函数 eP</p>
-<p><img src="/2018/12/16/1544945520/3.png" alt="查看Java源代码"></p>
-<p>发现 <strong>sign</strong> 是由 <strong>localObject2</strong> 赋值 , <strong>localObject2</strong> 由 <strong>localObject1</strong> 赋值 , <strong>localObject1</strong> 由函数 <strong>ig.d</strong>赋值 , 于是继续追踪函数</p>
-<h1 id="追踪函数"><a href="#追踪函数" class="headerlink" title="追踪函数"></a>追踪函数</h1><p>查看 <strong>ig.d</strong></p>
-<p><img src="/2018/12/16/1544945520/4.png" alt="查看igd函数"></p>
-<p>发现 return 处由另外函数 <strong>aE</strong> 赋值 , 继续查看 <strong>aE</strong> 函数 , 其中又使用了 <strong>e</strong> 函数进行复制</p>
-<p><img src="/2018/12/16/1544945520/5.png" alt="查看aE函数"></p>
-<p>发现是一个 摘要算法 MD5 的加密</p>
-<p><img src="/2018/12/16/1544945520/6.png" alt="查看e函数"></p>
-<h1 id="sign-算法解密"><a href="#sign-算法解密" class="headerlink" title="sign 算法解密"></a>sign 算法解密</h1><p>结合前面的 Java 源码中的函数 <strong>eP</strong> , 静态分析出传递给 <strong>ig.d</strong> 方法的参数为 POST 除 sign 字段的所有字段值加上一个常量值 <strong>xF3m1m4CrvQd3VsfsEpIf6s0CPWT7sJu</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">eP</span><span class="params">()</span></span></span><br><span class="line"><span class="function"> </span>&#123;</span><br><span class="line">   RequestParams localRequestParams = <span class="keyword">new</span> RequestParams();</span><br><span class="line">   localRequestParams.setHeader(<span class="string">"Cookie"</span>, hz.a(<span class="keyword">this</span>.pw));</span><br><span class="line">   localRequestParams.addBodyParameter(<span class="string">"cmd"</span>, <span class="string">"course.subject"</span>);</span><br><span class="line">   localRequestParams.addBodyParameter(<span class="string">"client"</span>, <span class="string">"chinamoocs"</span>);</span><br><span class="line">   localRequestParams.addBodyParameter(<span class="string">"level"</span>, <span class="string">"2"</span>);</span><br><span class="line">   localRequestParams.addBodyParameter(<span class="string">"spoc"</span>, String.valueOf(gt.c(<span class="keyword">this</span>.pE)));</span><br><span class="line">   Object localObject1 = <span class="keyword">new</span> ArrayList();</span><br><span class="line">   ((List)localObject1).add(<span class="string">"course.subject"</span>);</span><br><span class="line">   ((List)localObject1).add(<span class="string">"chinamoocs"</span>);</span><br><span class="line">   ((List)localObject1).add(<span class="string">"2"</span>);</span><br><span class="line">   ((List)localObject1).add(String.valueOf(gt.c(<span class="keyword">this</span>.pE)));</span><br><span class="line">   ((List)localObject1).add(<span class="string">"xF3m1m4CrvQd3VsfsEpIf6s0CPWT7sJu"</span>);</span><br><span class="line">   Object localObject2 = <span class="string">""</span>;</span><br><span class="line">   <span class="keyword">try</span></span><br><span class="line">   &#123;</span><br><span class="line">     localObject1 = ig.d((List)localObject1);</span><br><span class="line">     localObject2 = localObject1;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">catch</span> (Exception localException)</span><br><span class="line">   &#123;</span><br><span class="line">     <span class="keyword">for</span> (;;) &#123;&#125;</span><br><span class="line">   &#125;</span><br><span class="line">   localRequestParams.addBodyParameter(<span class="string">"sign"</span>, ((String)localObject2).toLowerCase());</span><br><span class="line">   <span class="keyword">new</span> HttpUtils().send(HttpRequest.HttpMethod.POST, gr.pn, localRequestParams, <span class="keyword">new</span> RequestCallBack()</span><br><span class="line">   &#123;</span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onFailure</span><span class="params">(HttpException paramAnonymousHttpException, String paramAnonymousString)</span> </span>&#123;&#125;</span><br><span class="line">     </span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onStart</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">     </span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onSuccess</span><span class="params">(ResponseInfo&lt;String&gt; paramAnonymousResponseInfo)</span></span></span><br><span class="line"><span class="function">     </span>&#123;</span><br><span class="line">       hz.a(paramAnonymousResponseInfo, HomeActivity.<span class="keyword">this</span>.pw);</span><br><span class="line">       ie.d(HomeActivity.<span class="keyword">this</span>.TAG, <span class="string">"我的课程  返回： "</span> + (String)paramAnonymousResponseInfo.result);</span><br><span class="line">       hz.a(paramAnonymousResponseInfo, HomeActivity.<span class="keyword">this</span>.pw);</span><br><span class="line">       <span class="keyword">try</span></span><br><span class="line">       &#123;</span><br><span class="line">         JSONObject localJSONObject = <span class="keyword">new</span> org/json/JSONObject;</span><br><span class="line">         localJSONObject.&lt;init&gt;((String)paramAnonymousResponseInfo.result);</span><br><span class="line">         String str = localJSONObject.optString(<span class="string">"code"</span>);</span><br><span class="line">         localJSONObject.optString(<span class="string">"message"</span>, <span class="string">"服务器或网络出现错误，请稍后再试~"</span>);</span><br><span class="line">         <span class="keyword">if</span> (<span class="string">"000000"</span>.equals(str))</span><br><span class="line">         &#123;</span><br><span class="line">           hh.c(localJSONObject.getJSONObject(<span class="string">"result"</span>).optJSONArray(<span class="string">"subjects"</span>), HomeActivity.<span class="keyword">this</span>.pw.qH);</span><br><span class="line">           hz.a(paramAnonymousResponseInfo, HomeActivity.<span class="keyword">this</span>.pw);</span><br><span class="line">         &#125;</span><br><span class="line">         <span class="keyword">return</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">catch</span> (JSONException paramAnonymousResponseInfo)</span><br><span class="line">       &#123;</span><br><span class="line">         <span class="keyword">for</span> (;;)</span><br><span class="line">         &#123;</span><br><span class="line">           paramAnonymousResponseInfo.printStackTrace();</span><br><span class="line">         &#125;</span><br><span class="line">       &#125;</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<p>重新组合文本并使用 md5 加密 , 可以得出 HTTP 请求中一致的 sign 字段值 到此 sign 算法解密结束</p>
-<p><img src="/2018/12/16/1544945520/7.png" alt="sign解密验证"></p>
-<h1 id="password-算法解密"><a href="#password-算法解密" class="headerlink" title="password 算法解密"></a>password 算法解密</h1><p>根据 Fiddler 截获的封包中 , 发现登录的 HTTP 封包如下</p>
-<p><img src="/2018/12/16/1544945520/8.png" alt="password封包"><br><figure class="highlight"><figcaption><span>request</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">POST</span> <span class="string">http://api.mooc.minghuaetc.com/v1</span> HTTP/1.1</span><br><span class="line"><span class="attribute">Cookie</span>: moocvk=**************;</span><br><span class="line"><span class="attribute">Content-Length</span>: 121</span><br><span class="line"><span class="attribute">Content-Type</span>: application/x-www-form-urlencoded</span><br><span class="line"><span class="attribute">Host</span>: api.mooc.minghuaetc.com</span><br><span class="line"><span class="attribute">Connection</span>: Keep-Alive</span><br><span class="line"><span class="attribute">User-Agent</span>: Mozilla/5.0 (Linux; U; Android 8.0.0; en-gb; SM-G9650 Build/R16NW) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1</span><br><span class="line"><span class="attribute">Accept-Encoding</span>: gzip</span><br><span class="line"></span><br><span class="line">cmd=sys.login.no&amp;client=chinamoocs&amp;orgid=**&amp;user=**&amp;password=dk******h1DI%3D%0A&amp;sign=***********************</span><br></pre></td></tr></table></figure></p>
-<p>出于安全考虑已经 Cookies 信息和用户凭据字段做处理实际测试中以实际值为准 , 将其 <strong>URLDecode</strong> 后 <strong>dk<strong>**</strong>h1DI%3D%0A</strong>为 <strong>dk<strong>**</strong>h1DI=</strong></p>
-<p>因此推测是一串 Base64 编码的字符串 , 先对其进行直接解码后发现为乱码 , 因此这不是一个单纯的 Base64 编码与百度贴吧客户端不同 , 再次搜索方法 , 找到位于类</p>
-<blockquote>
-<p>com/wisedu/mooccloud/mhaetc/phone/ui/UnifyLucherActivity</p>
-</blockquote>
-<p>中的 <strong>as</strong>函数 , 静态分析发现 , <strong>password</strong> 是由 <strong>localObject1</strong> 赋值 , <strong>localObject1</strong> 是由函数 <strong>ig.aF</strong> 赋值</p>
-<p><img src="/2018/12/16/1544945520/8.png" alt="查看as函数"></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">as</span><span class="params">(<span class="keyword">final</span> String paramString)</span></span></span><br><span class="line"><span class="function"> </span>&#123;</span><br><span class="line">   <span class="keyword">final</span> String str1 = <span class="keyword">this</span>.uC.getText().toString();</span><br><span class="line">   <span class="keyword">final</span> String str2 = <span class="keyword">this</span>.uD.getText().toString();</span><br><span class="line">   Object localObject1 = ig.aF(str2);</span><br><span class="line">   RequestParams localRequestParams = <span class="keyword">new</span> RequestParams();</span><br><span class="line">   localRequestParams.setHeader(<span class="string">"Cookie"</span>, hz.a(<span class="keyword">this</span>.pw));</span><br><span class="line">   localRequestParams.addBodyParameter(<span class="string">"cmd"</span>, <span class="string">"auth.login"</span>);</span><br><span class="line">   localRequestParams.addBodyParameter(<span class="string">"client"</span>, <span class="string">"chinamoocs"</span>);</span><br><span class="line">   localRequestParams.addBodyParameter(<span class="string">"user"</span>, str1);</span><br><span class="line">   localRequestParams.addBodyParameter(<span class="string">"password"</span>, (String)localObject1);</span><br><span class="line">   Object localObject2 = <span class="keyword">new</span> ArrayList();</span><br><span class="line">   ((List)localObject2).add(<span class="string">"auth.login"</span>);</span><br><span class="line">   ((List)localObject2).add(<span class="string">"chinamoocs"</span>);</span><br><span class="line">   ((List)localObject2).add(str1);</span><br><span class="line">   ((List)localObject2).add(localObject1);</span><br><span class="line">   ((List)localObject2).add(<span class="string">"xF3m1m4CrvQd3VsfsEpIf6s0CPWT7sJu"</span>);</span><br><span class="line">   localObject1 = <span class="string">""</span>;</span><br><span class="line">   <span class="keyword">try</span></span><br><span class="line">   &#123;</span><br><span class="line">     localObject2 = ig.d((List)localObject2);</span><br><span class="line">     localObject1 = localObject2;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">catch</span> (Exception localException)</span><br><span class="line">   &#123;</span><br><span class="line">     <span class="keyword">for</span> (;;) &#123;&#125;</span><br><span class="line">   &#125;</span><br><span class="line">   localRequestParams.addBodyParameter(<span class="string">"sign"</span>, ((String)localObject1).toLowerCase());</span><br><span class="line">   <span class="keyword">new</span> HttpUtils().send(HttpRequest.HttpMethod.POST, paramString, localRequestParams, <span class="keyword">new</span> RequestCallBack()</span><br><span class="line">   &#123;</span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onFailure</span><span class="params">(HttpException paramAnonymousHttpException, String paramAnonymousString)</span></span></span><br><span class="line"><span class="function">     </span>&#123;</span><br><span class="line">       Toast.makeText(UnifyLucherActivity.<span class="keyword">this</span>, <span class="string">"获取认证信息失败..."</span>, <span class="number">0</span>).show();</span><br><span class="line">       UnifyLucherActivity.a(UnifyLucherActivity.<span class="keyword">this</span>).ed();</span><br><span class="line">     &#125;</span><br><span class="line">     </span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onStart</span><span class="params">()</span></span></span><br><span class="line"><span class="function">     </span>&#123;</span><br><span class="line">       UnifyLucherActivity.a(UnifyLucherActivity.<span class="keyword">this</span>).m(UnifyLucherActivity.<span class="keyword">this</span>, <span class="string">"正在认证，请稍后..."</span>);</span><br><span class="line">     &#125;</span><br><span class="line">     </span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onSuccess</span><span class="params">(ResponseInfo&lt;String&gt; paramAnonymousResponseInfo)</span></span></span><br><span class="line"><span class="function">     </span>&#123;</span><br><span class="line">       hz.a(paramAnonymousResponseInfo, UnifyLucherActivity.a(UnifyLucherActivity.<span class="keyword">this</span>));</span><br><span class="line">       <span class="keyword">try</span></span><br><span class="line">       &#123;</span><br><span class="line">         Object localObject1 = <span class="keyword">new</span> org/json/JSONObject;</span><br><span class="line">         ((JSONObject)localObject1).&lt;init&gt;((String)paramAnonymousResponseInfo.result);</span><br><span class="line">         Object localObject2 = ((JSONObject)localObject1).optString(<span class="string">"code"</span>);</span><br><span class="line">         paramAnonymousResponseInfo = ((JSONObject)localObject1).optString(<span class="string">"message"</span>, <span class="string">"服务器或网络出现错误，请稍后再试~"</span>);</span><br><span class="line">         <span class="keyword">if</span> (<span class="string">"000000"</span>.equals(localObject2))</span><br><span class="line">         &#123;</span><br><span class="line">           localObject2 = ((JSONObject)localObject1).getJSONObject(<span class="string">"result"</span>);</span><br><span class="line">           paramAnonymousResponseInfo = ((JSONObject)localObject2).optString(<span class="string">"data"</span>);</span><br><span class="line">           localObject1 = ((JSONObject)localObject2).optString(<span class="string">"from"</span>);</span><br><span class="line">           localObject2 = ((JSONObject)localObject2).optString(<span class="string">"key"</span>);</span><br><span class="line">           UnifyLucherActivity.a(UnifyLucherActivity.<span class="keyword">this</span>, str1, str2, UnifyLucherActivity.b(UnifyLucherActivity.<span class="keyword">this</span>), paramString, paramAnonymousResponseInfo, (String)localObject1, (String)localObject2);</span><br><span class="line">         &#125;</span><br><span class="line">         <span class="keyword">for</span> (;;)</span><br><span class="line">         &#123;</span><br><span class="line">           UnifyLucherActivity.a(UnifyLucherActivity.<span class="keyword">this</span>).ed();</span><br><span class="line">           <span class="keyword">return</span>;</span><br><span class="line">           Toast.makeText(UnifyLucherActivity.<span class="keyword">this</span>, paramAnonymousResponseInfo, <span class="number">0</span>).show();</span><br><span class="line">           UnifyLucherActivity.a(UnifyLucherActivity.<span class="keyword">this</span>).ed();</span><br><span class="line">         &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">catch</span> (JSONException paramAnonymousResponseInfo)</span><br><span class="line">       &#123;</span><br><span class="line">         <span class="keyword">for</span> (;;)</span><br><span class="line">         &#123;</span><br><span class="line">           paramAnonymousResponseInfo.printStackTrace();</span><br><span class="line">           Toast.makeText(UnifyLucherActivity.<span class="keyword">this</span>, <span class="string">"认证解析出错..."</span>, <span class="number">0</span>).show();</span><br><span class="line">           UnifyLucherActivity.a(UnifyLucherActivity.<span class="keyword">this</span>).ed();</span><br><span class="line">         &#125;</span><br><span class="line">       &#125;</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<p>继续追踪函数进行分析 , 静态分析发现 <strong>aF</strong> 是一个 <strong>DESede (3DES)</strong> 的对称算法</p>
-<p><img src="/2018/12/16/1544945520/10.png" alt="查看aF函数"></p>
-<p>其中 , 发现 3DES 的密匙存放于一个字节数组 <strong>zC</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">byte</span>[] zC = &#123; <span class="number">14</span>, -<span class="number">74</span>, <span class="number">79</span>, <span class="number">26</span>, <span class="number">2</span>, -<span class="number">3</span>, <span class="number">88</span>, <span class="number">121</span>, <span class="number">25</span>, -<span class="number">83</span>, <span class="number">84</span>, <span class="number">52</span>, <span class="number">13</span>, <span class="number">61</span>, -<span class="number">101</span>, <span class="number">1</span>, <span class="number">42</span>, <span class="number">25</span>, <span class="number">19</span>, <span class="number">70</span>, <span class="number">124</span>, -<span class="number">95</span>, -<span class="number">50</span>, <span class="number">44</span> &#125;;</span><br></pre></td></tr></table></figure>
-<p>随后我们使用 Python 进行测试 , 通过解密验证</p>
-<p><img src="/2018/12/16/1544945520/12.png" alt="Python测试"></p>
-<p>其中由于 Python 和 Java 的 byte[] 不一样 , 我们将 zC 转换成了 Base64 字符串 <strong>DrZPGgL9WHkZrVQ0DT2bASoZE0Z8oc4s</strong> , 并在解密的时候再解码使用</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> pyDes</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">pwd_encrypt</span><span class="params">(password)</span>:</span></span><br><span class="line">    key = <span class="string">"DrZPGgL9WHkZrVQ0DT2bASoZE0Z8oc4s"</span></span><br><span class="line">    key = base64.standard_b64decode(key)</span><br><span class="line">    k = pyDes.triple_des(key, pyDes.ECB, IV=<span class="literal">None</span>, pad=<span class="literal">None</span>, padmode=pyDes.PAD_PKCS5)</span><br><span class="line">    d = k.encrypt(password)</span><br><span class="line">    res = base64.b64encode(d)</span><br><span class="line">    <span class="keyword">return</span> bytes.decode(res, <span class="string">"utf8"</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">print(pwd_encrypt(<span class="string">"your password"</span>))</span><br></pre></td></tr></table></figure>
-<p>注意记得安装第三方库 <strong>pyDes</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install pyDes</span><br></pre></td></tr></table></figure>
-<p>至此整个过程结束 , 一份名华慕课的工具在我的 <a href="https://github.com/dirname/minghuaetc-hack-Python" target="_blank" rel="noopener">GitHub</a> 需要的可以自行 git</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>通过逆向过程我们发现名华慕课的安卓客户端没有 release 版本进行加密、函数混淆或对加密的函数使用so调用 , 这是不符合产品安全规范的</p>
+<p>目录下生成 whl 文件，随后使用pip安装即可</p>
+<p><img src="/2019/04/29/1556506356/package.png" alt="Finish Build"></p>
 
       
     </div>
@@ -601,7 +671,7 @@
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
     
-    <a href="https://blog.forgiveher.cn/2018/12/16/1544945520/" title="名华慕课App算法解密过程以及软件实现">https://blog.forgiveher.cn/2018/12/16/1544945520/</a>
+    <a href="https://blog.forgiveher.cn/2019/04/29/1556506356/" title="Mac 上编译 CUDA+Tensorflow">https://blog.forgiveher.cn/2019/04/29/1556506356/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
@@ -614,9 +684,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/逆向/" rel="tag"># 逆向</a>
-          
-            <a href="/tags/算法/" rel="tag"># 算法</a>
+            <a href="/tags/Tensorflow/" rel="tag"># Tensorflow</a>
           
         </div>
       
@@ -629,8 +697,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/15/1544852143/" rel="next" title="网易云音乐 Web 登录算法解密过程分析以及实现">
-                <i class="fa fa-chevron-left"></i> 网易云音乐 Web 登录算法解密过程分析以及实现
+              <a href="/2019/04/15/1555335611/" rel="next" title="Python运算符重载和特殊方法">
+                <i class="fa fa-chevron-left"></i> Python运算符重载和特殊方法
               </a>
             
           </div>
@@ -638,10 +706,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/03/10/1552210325/" rel="prev" title="彩虹六号战绩查询开发文档">
-                彩虹六号战绩查询开发文档 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -905,7 +969,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#捕获数据包"><span class="nav-number">1.</span> <span class="nav-text">捕获数据包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#搜索方法"><span class="nav-number">2.</span> <span class="nav-text">搜索方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#追踪函数"><span class="nav-number">3.</span> <span class="nav-text">追踪函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sign-算法解密"><span class="nav-number">4.</span> <span class="nav-text">sign 算法解密</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#password-算法解密"><span class="nav-number">5.</span> <span class="nav-text">password 算法解密</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#编译前准备"><span class="nav-number">1.</span> <span class="nav-text">编译前准备</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#禁用-SIP"><span class="nav-number">1.1.</span> <span class="nav-text">禁用 SIP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-Xcode-9-4"><span class="nav-number">1.2.</span> <span class="nav-text">安装 Xcode 9.4</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-Anaconda"><span class="nav-number">1.3.</span> <span class="nav-text">安装 Anaconda</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-NVIDIA-Runtime"><span class="nav-number">1.4.</span> <span class="nav-text">安装 NVIDIA Runtime</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-Web-Driver"><span class="nav-number">1.4.1.</span> <span class="nav-text">安装 Web Driver</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-CUDA-Toolkit"><span class="nav-number">1.4.2.</span> <span class="nav-text">安装 CUDA Toolkit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-cuDNN"><span class="nav-number">1.4.3.</span> <span class="nav-text">安装 cuDNN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-NCCL"><span class="nav-number">1.4.4.</span> <span class="nav-text">安装 NCCL</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Homebrew-部分"><span class="nav-number">1.5.</span> <span class="nav-text">Homebrew 部分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-Jdk"><span class="nav-number">1.6.</span> <span class="nav-text">安装 Jdk</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-Bazel"><span class="nav-number">1.7.</span> <span class="nav-text">安装 Bazel</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#激活环境变量"><span class="nav-number">1.8.</span> <span class="nav-text">激活环境变量</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#开始编译"><span class="nav-number">2.</span> <span class="nav-text">开始编译</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#下载-Tensorflow-源码"><span class="nav-number">2.1.</span> <span class="nav-text">下载 Tensorflow 源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置编译"><span class="nav-number">2.2.</span> <span class="nav-text">配置编译</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开始编译-1"><span class="nav-number">2.3.</span> <span class="nav-text">开始编译</span></a></li></ol></li></ol></div>
             
 
           </div>
